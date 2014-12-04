@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, jsonify
 from flask_restful import Api
 from dns.resolver import Resolver
 from flask_cors import CORS
@@ -33,7 +33,7 @@ def create_app(config_name):
 
     @app.route('/')
     def root():
-        """Health check. No data returned. Just 200."""
-        return '', 200
+        """Provide user a link to the main page. Also this route acts as a health check, returns 200."""
+        return jsonify({'message': "Check out www.openresolve.com for usage."}), 200
 
     return app
