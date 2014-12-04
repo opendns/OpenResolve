@@ -1,6 +1,7 @@
 OpenResolve
 ==================================================
-[![Build Status](https://travis-ci.org/opendns/OpenResolve.svg?branch=master)](https://travis-ci.org/opendns/OpenResolve)
+[![Build Status](https://travis-ci.org/opendns/OpenResolve.svg?branch=master)](https://travis-ci.org/opendns/OpenResolve) [![Coverage Status](https://img.shields.io/coveralls/opendns/OpenResolve.svg)](https://coveralls.io/r/opendns/OpenResolve?branch=coveralls)
+
 
 ##### Fall 2014 USF Intern Project
 
