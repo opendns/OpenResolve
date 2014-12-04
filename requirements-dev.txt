@@ -1,0 +1,5 @@
+-r requirements.txt
+ipdb==0.8
+ipython==2.2.0
+pep8==1.5.7
+pyflakes==0.8.1
