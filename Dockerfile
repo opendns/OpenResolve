@@ -1,5 +1,6 @@
 FROM ubuntu:trusty
 ENV DEBIAN_FRONTEND noninteractive
+ENV CORS_ORIGIN *
 
 # setup tools
 RUN apt-get update --yes --force-yes
