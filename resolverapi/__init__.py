@@ -1,7 +1,9 @@
+import os
+
 from flask import Flask
 from flask_restful import Api
 from dns.resolver import Resolver
-import os
+from flask_cors import CORS
 
 
 dns_resolver = Resolver()
@@ -17,6 +19,9 @@ def create_app(config_name):
     # Get nameservers from environment variable or default to OpenDNS resolvers
     if os.environ.get('RESOLVERS'):
         app.config['RESOLVERS'] = [addr.strip() for addr in os.environ.get('RESOLVERS').split(',')]
+    # Respond with Access-Control-Allow-Origin headers. Use * to accept all
+    if os.environ.get('CORS_ORIGIN'):
+        CORS(app, origins=os.environ.get('CORS_ORIGIN'))
 
     dns_resolver.lifetime = 3.0
 
