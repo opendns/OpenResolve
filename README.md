@@ -1,30 +1,26 @@
-resolver-api
+OpenResolve
 ==================================================
 
-Fall 2014 USF Intern Project
+##### Fall 2014 USF Intern Project
+
+OpenResolve aims to address three issues in the realm of domain name lookup. 1) DNS lookup typically requires command line tools, like dig, or whois, or manual interaction with an HTML interface. Our API makes DNS resolution available as a web service for any application. 2) DNS lookups are typically conducted over UDP, which offers no security regarding the data being transferred. Performing DNS resolution over HTTP and SSL ensures the data has not been altered. 3) Most DNS resolution returns output in a human readable format, but isn’t easily accessible programmatically. By transferring data in a commonly consumed format, JSON, we make it convenient for even high-level applications to use the data returned from a resolver.
 
 
-Recommended Setup:
+Environment Variables:
 --------------------------------------------------
 
-    pip install virtualenvwrapper
+RESOLVERS - A list of resolver ip's to use. Defualts to opendns servers if this environment variable is not passed.
 
-Put this in your .bashrc or .profile (whichever one actually loads):
+    export RESOLVERS='208.67.222.222,208.67.220.220'
 
-    export WORKON_HOME=$HOME/.virtualenvs
-    export PROJECT_HOME=$HOME/Devel
-    export VIRTUALENVWRAPPER_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
-    source /usr/local/bin/virtualenvwrapper_lazy.sh
+RESOLVER_ENV - Running environment [prod, dev]. Defaults to 'prod'. This sets the flask debug to mode to True when in dev.
 
-Start up a new bash window (or source your .bashrc):
-
-    mkvirtualenv -a <path_to_project_root> <ve_name>
-
-For me, that was `mkvirtualenv -a /User/kfunk/Repos/resolver-api/ resolver-api-ve`
-
+    export RESOLVER_ENV=dev
+    
 
 Tests:
 --------------------------------------------------
 
 	nosetests --with-coverage --cover-erase --cover-package=resolverapi
+
 
