@@ -18,7 +18,7 @@ class LookupRecordType(Resource):
 
         rdtype = rdtype.upper()
         current_app.logger.info(
-            'Request from %s - %s %s', request.remote_addr, rdtype, domain)
+            'Request from %s - %s', request.remote_addr, rdtype)
         self.valid_args(rdtype, domain)
 
         # Iterate through nameservers so that we can tell which one gets used.
