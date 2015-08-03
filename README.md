@@ -3,7 +3,7 @@ OpenResolve
 [![Build Status](https://travis-ci.org/opendns/OpenResolve.svg?branch=master)](https://travis-ci.org/opendns/OpenResolve) [![Coverage Status](https://img.shields.io/coveralls/opendns/OpenResolve.svg)](https://coveralls.io/r/opendns/OpenResolve)
 
 
-##### Fall 2014 USF Intern Project
+##### Fall 2014 USF Intern Project at OpenDNS
 
 OpenResolve aims to address three issues in the realm of domain name lookup:
 
@@ -17,7 +17,7 @@ OpenResolve aims to address three issues in the realm of domain name lookup:
 Environment Variables:
 --------------------------------------------------
 
-RESOLVERS - A list of resolver ip's to use. Defualts to opendns servers if this environment variable is not passed.
+RESOLVERS - A comma-separated list of resolver IPs to use. Defaults to OpenDNS IPv4 servers if this environment variable is not passed.
 
     export RESOLVERS='208.67.222.222,208.67.220.220'
 
