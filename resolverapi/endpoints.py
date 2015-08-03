@@ -18,7 +18,7 @@ class LookupRecordType(Resource):
 
         rdtype = rdtype.upper()
         current_app.logger.info(
-            'Request from %s - %s %s', request.remote_addr, rdtype, domain)
+            'Request from %s - %s', request.remote_addr, rdtype)
         self.valid_args(rdtype, domain)
 
         # Iterate through nameservers so that we can tell which one gets used.
@@ -50,9 +50,9 @@ class LookupRecordType(Resource):
 
     def valid_args(self, rdtype, domain):
         if not is_valid_rdtype(rdtype):
-            abort(400, message="%s type is not supported" % rdtype)
+            abort(400, message="The provided record type is not supported")
         if not is_valid_hostname(domain):
-            abort(400, message="%s is not a valid domain name" % domain)
+            abort(400, message="The provided domain name is invalid")
 
 
 class ReverseLookup(Resource):
@@ -79,7 +79,7 @@ class ReverseLookup(Resource):
                     return {'message': 'All nameservers timed out.'}, 503
                 continue
             except NXDOMAIN:
-                return {'message': 'No nameserver found for %s' % ip}, 404
+                return {'message': 'No nameserver found for the provided IP'}, 404
             except Exception as e:
                 current_app.logger.error(e)
                 return {'message': 'An unexpected error occured.'}, 500
@@ -93,4 +93,4 @@ class ReverseLookup(Resource):
 
     def valid_args(self, ip):
         if not is_valid_ip(ip):
-            abort(400, message="%s is not a valid ip address" % ip)
+            abort(400, message="The provided ip address is invalid")
