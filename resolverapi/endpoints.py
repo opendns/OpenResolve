@@ -32,7 +32,7 @@ class LookupRecordType(Resource):
                 break
             except (NoNameservers, NXDOMAIN):
                 # TODO: this should still follow the RFC
-                return {'message': "No nameservers for %s" % domain}, 404
+                return {'message': "No nameservers found for provided domain"}, 404
             except Timeout as e:
                 # Communication fail or timeout - try next nameserver
                 if nameserver is nameservers[-1]:

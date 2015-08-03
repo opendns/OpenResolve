@@ -23,20 +23,25 @@ class LookupRecordTests(BaseTest):
         domain = 'nonameserversatthisdomain.tld'
         resp, code = self.get('NS/%s' % domain)
         self.assert404(code)
-        self.assertDictEqual(resp, {
-            'message': 'No nameservers for %s' % domain})
+        self.assertTrue("message" in resp)
+        # Do not have unsanitized user value reflected in response
+        self.assertFalse(domain in resp.get("message"))
 
     def test_invalid_type(self):
-        resp, code = self.get('NA/google.com')
+        invalid_type = "NA"
+        resp, code = self.get("%s/opendns.com" % invalid_type)
         self.assert400(code)
-        self.assertDictEqual(resp, {'message': 'NA type is not supported'})
+        self.assertTrue("message" in resp)
+        # Do not have unsanitized user value reflected in response
+        self.assertFalse(invalid_type in resp.get("message"))
 
     def test_invalid_domain(self):
         domain = 'invalid&domain'
         resp, code = self.get('NS/%s' % domain)
         self.assert400(code)
-        self.assertDictEqual(resp, {
-            'message': '%s is not a valid domain name' % domain})
+        self.assertTrue("message" in resp)
+        # Do not have unsanitized user value reflected in response
+        self.assertFalse(domain in resp.get("message"))
 
     @patch('resolverapi.endpoints.dns_resolver.query')
     def test_timeout(self, query):
@@ -69,8 +74,9 @@ class LookupRecordTests(BaseTest):
         domain = u'ąćęłń óśźż.pl'
         resp, code = self.get('a/%s' % domain)
         self.assert400(code)
-        self.assertDictEqual(resp, {
-            'message': '%s is not a valid domain name' % domain})
+        self.assertTrue("message" in resp)
+        # Do not have unsanitized user value reflected in response
+        self.assertFalse(domain in resp.get("message"))
 
     @patch('resolverapi.endpoints.dns_resolver.query')
     def test_nonexistent_idn_domain(self, query):
@@ -81,8 +87,9 @@ class LookupRecordTests(BaseTest):
         domain = u'ąćęłńóśźż.plllll'
         resp, code = self.get('a/%s' % domain)
         self.assert404(code)
-        self.assertDictEqual(resp, {
-            'message': "No nameservers for %s" % domain})
+        self.assertTrue("message" in resp)
+        # Do not have unsanitized user value reflected in response
+        self.assertFalse(domain in resp.get("message"))
 
 
 class ReverseLookupTests(BaseTest):
